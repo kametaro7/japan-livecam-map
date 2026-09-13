@@ -1,0 +1,9 @@
+# macOS
+.DS_Store
+# Python
+__pycache__/
+*.pyc
+# ローカル作業用
+queries.txt
+candidates.jsonl
+*.log

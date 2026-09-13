@@ -1,0 +1,8 @@
+tools/
+README.md
+Dockerfile
+.dockerignore
+.gcloudignore
+deploy.sh
+**/__pycache__/
+**/.DS_Store

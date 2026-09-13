@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>日本ライブカメラマップ</title>
+<meta name="description" content="日本全国のYouTubeライブカメラを地図にマッピング。渋谷スクランブル交差点から富士山、桜島、沖縄のビーチまで、いま配信中の風景をワンクリックで。">
+<meta name="theme-color" content="#111318">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='15' fill='%23e5322d'/%3E%3Ccircle cx='16' cy='16' r='6' fill='white'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/MarkerCluster.Default.css">
+<link rel="stylesheet" href="assets/style.css?v=20260912e">
+</head>
+<body>
+
+<header id="topbar">
+  <button id="btn-list" class="icon-btn" title="カメラ一覧" aria-label="カメラ一覧を開く">
+    <svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/></svg>
+  </button>
+  <a class="brand" href="./" aria-label="日本ライブカメラマップ">
+    <span class="brand-dot"></span>
+    <span class="brand-text">日本ライブカメラマップ</span>
+  </a>
+  <div class="search-wrap">
+    <svg viewBox="0 0 24 24" class="search-ico"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" fill="none"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+    <input id="search" type="search" placeholder="地名・カメラ名で検索（例: 渋谷、富士山、空港）" autocomplete="off">
+  </div>
+  <select id="pref-select" aria-label="都道府県で絞り込み"><option value="all">すべての都道府県</option></select>
+  <button id="btn-multi" class="pill-btn" title="4画面で同時に見る">⊞ マルチビュー<span id="multi-count" class="multi-count" hidden></span></button>
+  <button id="btn-random" class="pill-btn" title="ランダムに開く（マルチビュー中は4画面すべて）">🎲 ランダム</button>
+  <span id="count-badge" class="count-badge" title="表示中のカメラ数"></span>
+</header>
+
+<div id="cat-bar" class="cat-bar" role="toolbar" aria-label="カテゴリで絞り込み"></div>
+
+<div id="app">
+  <aside id="sidebar" aria-label="カメラ一覧">
+    <div class="sidebar-head">
+      <strong>カメラ一覧</strong>
+      <span id="list-count" class="muted"></span>
+      <button id="btn-close-list" class="icon-btn" aria-label="一覧を閉じる">✕</button>
+    </div>
+    <div id="cam-list" class="cam-list"></div>
+  </aside>
+
+  <div id="map" role="application" aria-label="地図"></div>
+
+  <section id="multi" aria-label="マルチビュー" hidden>
+    <div class="multi-head">
+      <strong>⊞ マルチビュー</strong>
+      <span class="muted multi-hint">空の枠をクリック → 左の一覧からカメラを選ぶと入ります。🔊 で音声を1枠だけオンにできます。🎲 は4枠まとめて入れ替えます。</span>
+      <span class="multi-spacer"></span>
+      <button id="multi-random" class="pill-btn ghost" title="いまの絞り込みの中から4枠すべてを入れ替えます">🎲 4画面ランダム</button>
+      <button id="multi-share" class="pill-btn ghost">🔗 リンクをコピー</button>
+      <button id="multi-clear" class="pill-btn ghost">すべて外す</button>
+      <button id="multi-close" class="pill-btn">地図に戻る</button>
+    </div>
+    <div id="multi-grid" class="multi-grid"></div>
+  </section>
+
+  <section id="panel" aria-live="polite" aria-label="ライブ映像">
+    <div class="panel-drag" aria-hidden="true"></div>
+    <div class="panel-head">
+      <div class="panel-titles">
+        <span id="panel-cat" class="cat-chip"></span>
+        <h2 id="panel-name">—</h2>
+        <div id="panel-sub" class="muted"></div>
+      </div>
+      <button id="btn-close-panel" class="icon-btn" aria-label="閉じる">✕</button>
+    </div>
+    <div class="player-wrap">
+      <div id="player"></div>
+      <div id="player-note" class="player-note" hidden></div>
+    </div>
+    <div class="panel-actions">
+      <a id="link-youtube" class="pill-btn" target="_blank" rel="noopener">▶ YouTubeで開く</a>
+      <a id="link-channel" class="pill-btn ghost" target="_blank" rel="noopener">チャンネル</a>
+      <button id="btn-add-multi" class="pill-btn ghost" title="4画面のマルチビューに追加">⊞ マルチビューに追加</button>
+      <button id="btn-share" class="pill-btn ghost">🔗 リンクをコピー</button>
+      <button id="btn-fallback" class="pill-btn ghost" title="この配信が見られないときに、チャンネルの現在のライブ配信へ切り替えます">配信が止まっている時はこちら</button>
+    </div>
+    <p id="panel-title" class="panel-orig muted"></p>
+    <div class="nearby">
+      <h3>近くのカメラ</h3>
+      <div id="nearby-list" class="nearby-list"></div>
+    </div>
+    <p class="panel-foot muted">映像は各チャンネルの配信者に帰属します。地図: <a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">地理院タイル</a></p>
+  </section>
+</div>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.5.3/leaflet.markercluster.js"></script>
+<script src="data/cameras.js?v=20260912e"></script>
+<script src="assets/app.js?v=20260912e"></script>
+</body>
+</html>
