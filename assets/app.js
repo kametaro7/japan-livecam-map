@@ -22,6 +22,20 @@
   const CAMERAS = (window.CAMERAS || []).map((c, i) => Object.assign({ _i: i }, c));
   const UPDATED = window.CAMERAS_UPDATED || '';
 
+  // 実行時に「再生できない」と分かった配信を、この端末に記録してランダムの候補から外す。
+  // 配信ID（video）単位で覚えるので、台帳が更新されて ID が変われば自然に無効になる。
+  const BAD_KEY = 'lcm.bad', BAD_TTL = 14 * 864e5;
+  let badMap = {};
+  try { badMap = JSON.parse(localStorage.getItem(BAD_KEY) || '{}') || {}; } catch (e) { badMap = {}; }
+  for (const v of Object.keys(badMap)) if (!badMap[v] || Date.now() - badMap[v].t > BAD_TTL) delete badMap[v];
+  for (const c of CAMERAS) { const r = badMap[c.video]; if (r) { if (r.why === 'noembed') c.noembed = true; else c.offline = true; } }
+  function markBad(cam, why) {
+    if (why === 'noembed') cam.noembed = true; else cam.offline = true;
+    badMap[cam.video] = { why, t: Date.now() };
+    try { localStorage.setItem(BAD_KEY, JSON.stringify(badMap)); } catch (e) { /* noop */ }
+  }
+  function isPlayable(c) { return !c.offline && !c.noembed; }
+
   // ---------- DOM ----------
   const $ = (s) => document.querySelector(s);
   const el = {
@@ -225,10 +239,11 @@
 
   function onPlayerError(cam, code) {
     // 100: 動画が見つからない / 101,150: 埋め込み不可 / 2: パラメータ不正 / 5: HTML5エラー
+    if (ERR_KIND[code]) markBad(cam, ERR_KIND[code]);
     if (code === 100 || code === 2) {
       showNote('この配信のIDが無効になっています。チャンネルの最新ライブに切り替えます…');
       setTimeout(() => { if (state.current && state.current.id === cam.id) mountChannelLive(cam); }, 900);
-    } else if (code === 101 || code === 150) {
+    } else if (code === 101 || code === 150 || code === 152) {
       showNote('この配信は埋め込み再生が許可されていません。「YouTubeで開く」から視聴してください。');
     } else {
       showNote('再生エラーが発生しました（code ' + code + '）。YouTubeで開いてお試しください。');
@@ -359,7 +374,8 @@
   $('#btn-random').addEventListener('click', () => {
     if (multi.open) { randomizeAllSlots(); return; }
     const list = currentList(); if (!list.length) return;
-    openCamera(list[Math.floor(Math.random() * list.length)], { fly: true });
+    const ok = list.filter(isPlayable), pool = ok.length ? ok : list;
+    openCamera(pool[Math.floor(Math.random() * pool.length)], { fly: true });
   });
   $('#btn-share').addEventListener('click', async () => {
     if (!state.current) return;
@@ -381,7 +397,7 @@
     const mm = location.hash.match(/#multi=([\w,-]*)/);
     if (mm) {
       const ids = mm[1].split(',');
-      for (let i = 0; i < 4; i++) multi.slots[i] = CAMERAS.some((c) => c.id === ids[i]) ? ids[i] : null;
+      for (let i = 0; i < 4; i++) { multi.slots[i] = CAMERAS.some((c) => c.id === ids[i]) ? ids[i] : null; multi.auto[i] = false; multi.retry[i] = 0; }
       saveMulti(); openMulti(); return true;
     }
     const m = location.hash.match(/#cam=([\w-]+)/);
@@ -392,8 +408,17 @@
   }
 
   // ---------- マルチビュー（4画面） ----------
-  const multi = { open: false, slots: [null, null, null, null], target: null, big: null, audio: null };
+  // auto[i]: その枠をランダムで埋めたか（再生できなかったとき自動で差し替えてよいか）
+  // retry[i]: 自動差し替えの連続回数（無限ループ防止）
+  const multi = { open: false, slots: [null, null, null, null], target: null, big: null, audio: null,
+    auto: [false, false, false, false], retry: [0, 0, 0, 0] };
   const mEl = { root: $('#multi'), grid: $('#multi-grid'), btn: $('#btn-multi'), count: $('#multi-count') };
+  // 各枠の YouTube 埋め込み（素の iframe）と、そこから通知された最新の再生状態。
+  // 公式 API のプレイヤーオブジェクトを使うと、ページが裏にあるとき自動再生が始まらないことがあったため素の iframe にしている
+  const slotFrames = [null, null, null, null];
+  const slotState = [null, null, null, null];
+  const ERR_KIND = { 2: 'offline', 100: 'offline', 101: 'noembed', 150: 'noembed', 152: 'noembed', ended: 'offline' };
+  const MAX_AUTO_RETRY = 5;
   try { const saved = JSON.parse(localStorage.getItem('lcm.multi') || 'null'); if (saved && Array.isArray(saved.slots)) { for (let i = 0; i < 4; i++) multi.slots[i] = CAMERAS.some((c) => c.id === saved.slots[i]) ? saved.slots[i] : null; } } catch (e) { /* noop */ }
 
   function saveMulti() {
@@ -403,6 +428,7 @@
     if (multi.open) history.replaceState(null, '', '#multi=' + multi.slots.map((x) => x || '').join(','));
   }
   function camById(id) { return CAMERAS.find((c) => c.id === id) || null; }
+  function firstEmpty() { const e = multi.slots.indexOf(null); return e < 0 ? null : e; }
 
   function openMulti() {
     if (!multi.open) {
@@ -416,6 +442,7 @@
     else if (!multi.slots.includes(null)) el.sidebar.classList.remove('open');
   }
   function closeMulti() {
+    for (let i = 0; i < 4; i++) destroySlotPlayer(i);
     multi.open = false; multi.target = null; multi.big = null; multi.audio = null;
     mEl.root.hidden = true; mEl.btn.classList.remove('active');
     mEl.grid.replaceChildren();
@@ -425,30 +452,47 @@
   }
   function addToMulti(cam, slotIndex) {
     let i = slotIndex;
-    if (i == null) i = multi.target != null && !multi.slots[multi.target] ? multi.target : multi.slots.indexOf(null);
-    if (i < 0) i = multi.target != null ? multi.target : 3; // 満杯なら選択中の枠か最後の枠を差し替え
+    // 選択中の枠（空き枠のクリックや ⇄ で指定した枠）を最優先。無ければ最初の空き枠、満杯なら最後の枠
+    if (i == null) i = multi.target != null ? multi.target : multi.slots.indexOf(null);
+    if (i < 0) i = 3;
     if (multi.slots.includes(cam.id) && multi.slots[i] !== cam.id) { toast('「' + cam.name + '」はすでに枠 ' + (multi.slots.indexOf(cam.id) + 1) + ' にあります'); return; }
-    multi.slots[i] = cam.id;
-    multi.target = multi.slots.indexOf(null) >= 0 ? multi.slots.indexOf(null) : null;
+    multi.slots[i] = cam.id; multi.auto[i] = false; multi.retry[i] = 0; // 自分で選んだカメラは勝手に差し替えない
+    multi.target = firstEmpty();
     if (!multi.open) openMulti(); else { renderMulti(); saveMulti(); }
-    toast('枠 ' + (i + 1) + ' に「' + cam.name + '」を追加しました');
+    toast('枠 ' + (i + 1) + ' に「' + cam.name + '」を追加しました' + (isPlayable(cam) ? '' : '（サイト内では再生できないカメラです）'));
     if (isMobile() || multi.target == null) el.sidebar.classList.remove('open'); // 4枠そろったら一覧を閉じて全画面で見せる
   }
   function removeFromMulti(i) {
-    multi.slots[i] = null;
+    multi.slots[i] = null; multi.auto[i] = false; multi.retry[i] = 0;
     if (multi.big === i) multi.big = null;
     if (multi.audio === i) multi.audio = null;
     multi.target = i; renderMulti(); saveMulti();
   }
+
+  // 再生できるカメラの中からランダムに 1 台（いまの絞り込みを優先し、尽きたら全国から）
+  function pickRandom(exclude) {
+    const usable = (list) => list.filter((c) => isPlayable(c) && !exclude.includes(c.id));
+    const pool = usable(currentList());
+    const from = pool.length ? pool : usable(CAMERAS);
+    return from.length ? from[Math.floor(Math.random() * from.length)] : null;
+  }
+  // 1 枠だけランダムに入れ替える
+  function randomizeSlot(i) {
+    const cam = pickRandom(multi.slots);
+    if (!cam) { toast('再生できるカメラが見つかりませんでした'); return null; }
+    multi.slots[i] = cam.id; multi.auto[i] = true;
+    if (multi.target === i) multi.target = firstEmpty();
+    renderMulti(); saveMulti();
+    return cam;
+  }
   // 4枠すべてを、いまの絞り込み（カテゴリ・都道府県・検索）の中からランダムに入れ替える
   function randomizeAllSlots() {
-    const pool = currentList().filter((c) => !c.offline && !c.noembed); // 停止中・埋め込み不可は選ばない
-    if (!pool.length) { toast('条件に合うカメラがありません'); return; }
+    const pool = currentList().filter(isPlayable); // 停止中・埋め込み不可は選ばない
+    if (!pool.length) { toast('条件に合う再生可能なカメラがありません'); return; }
     const rest = pool.slice(), picked = [];
     while (picked.length < 4 && rest.length) picked.push(rest.splice(Math.floor(Math.random() * rest.length), 1)[0].id);
-    for (let i = 0; i < 4; i++) multi.slots[i] = picked[i] || null;
-    const empty = multi.slots.indexOf(null);
-    multi.target = empty < 0 ? null : empty;
+    for (let i = 0; i < 4; i++) { multi.slots[i] = picked[i] || null; multi.auto[i] = !!picked[i]; multi.retry[i] = 0; }
+    multi.target = firstEmpty();
     multi.audio = null; // 入れ替え後はいったん全部ミュートに戻す
     renderMulti(); saveMulti();
     el.sidebar.classList.remove('open');
@@ -457,75 +501,168 @@
       : '4画面をランダムに入れ替えました');
   }
 
+  // 枠のカメラが再生できなかったとき
+  function onSlotError(i, cam, code) {
+    if (multi.slots[i] !== cam.id) return; // すでに別のカメラに替わっている
+    const why = ERR_KIND[code] || null;
+    if (why && typeof code === 'number') markBad(cam, why); // 「終了」は一時的なこともあるので端末には記録しない
+    // ランダムで入れた枠なら、黙って別のカメラに差し替える（手動で選んだ枠は勝手に替えない）
+    if (multi.auto[i] && multi.retry[i] < MAX_AUTO_RETRY) {
+      multi.retry[i]++;
+      const next = randomizeSlot(i);
+      if (next) { toast('「' + cam.name + '」はサイト内で再生できないため、枠 ' + (i + 1) + ' を「' + next.name + '」に入れ替えました'); return; }
+    }
+    const s = mEl.grid.querySelector('.slot[data-i="' + i + '"]');
+    if (s) { destroySlotPlayer(i); showSlotBlocked(s, i, cam, why || 'error', code); }
+  }
+
+  // 再生できない枠の中身（ボタンはすべて使える状態のまま）
+  function showSlotBlocked(s, i, cam, why, code) {
+    const title = why === 'offline' ? 'この配信は終了しているか、見つかりません' : 'このカメラはサイト内で再生できません';
+    const sub = why === 'offline' ? '配信が再起動されてIDが変わった可能性があります'
+      : why === 'noembed' ? '配信者が外部サイトでの再生を許可していません'
+      : '再生エラーが発生しました（code ' + code + '）';
+    const body = s.querySelector('.slot-body');
+    body.innerHTML =
+      '<div class="slot-noembed"><b></b><small></small><div class="slot-noembed-actions">' +
+      '<button class="pill-btn slot-reroll-b">🎲 別のカメラにする</button>' +
+      '<button class="pill-btn ghost slot-pick-b">⇄ 一覧から選ぶ</button>' +
+      '<a class="pill-btn ghost" target="_blank" rel="noopener">▶ YouTubeで見る</a></div></div>';
+    body.querySelector('b').textContent = title;
+    body.querySelector('small').textContent = sub;
+    body.querySelector('a').href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(cam.video);
+    body.querySelector('.slot-reroll-b').addEventListener('click', () => { multi.retry[i] = 0; randomizeSlot(i); });
+    body.querySelector('.slot-pick-b').addEventListener('click', () => pickForSlot(i));
+  }
+
+  function pickForSlot(i) {
+    multi.target = i; renderMulti(); el.sidebar.classList.add('open'); el.search.focus();
+    toast('一覧からカメラをクリックすると枠 ' + (i + 1) + ' を入れ替えます');
+  }
+
   function ytCmd(iframe, func) {
     try { iframe.contentWindow.postMessage(JSON.stringify({ event: 'command', func, args: [] }), 'https://www.youtube.com'); } catch (e) { /* noop */ }
   }
+  function applyAudio(i) {
+    const on = i === multi.audio;
+    if (slotFrames[i]) ytCmd(slotFrames[i], on ? 'unMute' : 'mute');
+    const b = mEl.grid.querySelector('.slot[data-i="' + i + '"] .slot-audio');
+    if (b) { b.classList.toggle('on', on); b.textContent = on ? '🔊' : '🔇'; b.title = on ? '音声オン（クリックでミュート）' : '音声をオンにする'; }
+  }
   function setAudio(i) {
     multi.audio = multi.audio === i ? null : i;
-    for (const s of mEl.grid.querySelectorAll('.slot')) {
-      const f = s.querySelector('iframe'); const b = s.querySelector('.slot-audio');
-      const on = Number(s.dataset.i) === multi.audio;
-      if (f) ytCmd(f, on ? 'unMute' : 'mute');
-      if (b) { b.classList.toggle('on', on); b.textContent = on ? '🔊' : '🔇'; b.title = on ? '音声オン（クリックでミュート）' : '音声をオンにする'; }
-    }
+    for (let k = 0; k < 4; k++) applyAudio(k);
   }
+
+  function destroySlotPlayer(i) { slotFrames[i] = null; slotState[i] = null; }
+
+  // 枠の外側（見出しとボタン）を作る。ボタンは再生できる・できないに関係なく必ず有効にする
+  function buildSlot(i, cam) {
+    const s = document.createElement('div');
+    s.className = 'slot' + (multi.target === i ? ' target' : '') + (multi.big === i ? ' big' : '');
+    s.dataset.i = i; s.dataset.id = cam ? cam.id : '';
+    if (!cam) {
+      s.innerHTML = '<button class="slot-empty"><b>＋ 枠 ' + (i + 1) + ' にカメラを追加</b><small>クリックして選択 → 左の一覧・検索から選ぶ</small></button>';
+      s.querySelector('.slot-empty').addEventListener('click', () => { multi.target = i; renderMulti(); el.sidebar.classList.add('open'); el.search.focus(); toast('一覧からカメラをクリックすると枠 ' + (i + 1) + ' に入ります'); });
+      return s;
+    }
+    s.innerHTML =
+      '<div class="slot-head"><span class="slot-num">' + (i + 1) + '</span><span class="slot-name"></span>' +
+      '<button class="slot-btn slot-audio" title="音声をオンにする">🔇</button>' +
+      '<button class="slot-btn slot-big" title="拡大 / 元に戻す">⤢</button>' +
+      '<button class="slot-btn slot-swap" title="一覧から別のカメラを選ぶ">⇄</button>' +
+      '<button class="slot-btn slot-reroll" title="この枠だけランダムに入れ替え">🎲</button>' +
+      '<a class="slot-btn slot-yt" target="_blank" rel="noopener" title="YouTubeで開く">▶</a>' +
+      '<button class="slot-btn slot-close" title="枠から外す">✕</button></div>' +
+      '<div class="slot-body"></div>';
+    s.querySelector('.slot-name').textContent = cam.name + '　' + [cam.pref, cam.city].filter(Boolean).join(' ');
+    s.querySelector('.slot-yt').href = 'https://www.youtube.com/watch?v=' + encodeURIComponent(cam.video);
+    s.querySelector('.slot-big').classList.toggle('on', multi.big === i);
+    s.querySelector('.slot-audio').addEventListener('click', () => setAudio(i));
+    s.querySelector('.slot-big').addEventListener('click', () => { multi.big = multi.big === i ? null : i; renderMulti(); });
+    s.querySelector('.slot-swap').addEventListener('click', () => pickForSlot(i));
+    s.querySelector('.slot-reroll').addEventListener('click', () => { multi.retry[i] = 0; randomizeSlot(i); });
+    s.querySelector('.slot-close').addEventListener('click', () => removeFromMulti(i));
+    return s;
+  }
+
+  // 枠の中身（映像）を入れる。枠を画面に追加したあとで呼ぶ
+  function mountSlotMedia(s, i, cam) {
+    if (cam.noembed) { showSlotBlocked(s, i, cam, 'noembed'); return; }
+    const body = s.querySelector('.slot-body');
+    const f = document.createElement('iframe');
+    f.src = 'https://www.youtube.com/embed/' + encodeURIComponent(cam.video) + '?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
+    f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = cam.name;
+    const mine = () => slotFrames[i] === f;
+    // 読み込み後: エラーと再生状態を知らせてもらうよう登録し、4本同時でも再生が始まるよう明示的に指示する
+    f.addEventListener('load', () => {
+      if (!mine()) return;
+      listenSlot(f, i);
+      ytCmd(f, 'mute'); ytCmd(f, 'playVideo');
+      setTimeout(() => { if (mine()) { listenSlot(f, i); applyAudio(i); ytCmd(f, 'playVideo'); } }, 1500);
+      setTimeout(() => { if (mine() && ![1, 2, 3].includes(slotState[i])) ytCmd(f, 'playVideo'); }, 4000);
+    });
+    slotFrames[i] = f; slotState[i] = null;
+    body.appendChild(f);
+    if (cam.offline) body.insertAdjacentHTML('beforeend', '<div class="slot-note">前回の確認時に停止していた配信です。映らない場合は 🎲 で別のカメラへ。</div>');
+  }
+  // 埋め込みプレイヤーに「エラーと再生状態を知らせて」と登録する（公式 API が内部で使っているのと同じ仕組み）
+  function listenSlot(f, i) {
+    const id = 'lcm-slot' + i;
+    const send = (o) => { try { f.contentWindow.postMessage(JSON.stringify(o), 'https://www.youtube.com'); } catch (e) { /* noop */ } };
+    send({ event: 'listening', id, channel: 'widget' });
+    send({ event: 'command', func: 'addEventListener', args: ['onError'], id, channel: 'widget' });
+    send({ event: 'command', func: 'addEventListener', args: ['onStateChange'], id, channel: 'widget' });
+  }
+  // 埋め込みプレイヤーからの通知を受け取る
+  window.addEventListener('message', (e) => {
+    if (e.origin !== 'https://www.youtube.com' || !multi.open) return;
+    const i = slotFrames.findIndex((f) => f && f.contentWindow === e.source);
+    if (i < 0) return;
+    let d; try { d = typeof e.data === 'string' ? JSON.parse(e.data) : e.data; } catch (err) { return; }
+    if (!d || !d.event) return;
+    const cam = camById(multi.slots[i]); if (!cam) return;
+    if (d.event === 'onError') { onSlotError(i, cam, Number(d.info)); return; }
+    const st = d.event === 'onStateChange' ? d.info
+      : (d.event === 'infoDelivery' && d.info && typeof d.info.playerState === 'number') ? d.info.playerState : null;
+    if (typeof st !== 'number' || st === slotState[i]) return;
+    slotState[i] = st;
+    if (st === 1) multi.retry[i] = 0;                 // 再生できたら自動差し替えの回数をリセット
+    else if (st === 0) onSlotError(i, cam, 'ended');  // ライブ配信が終了した
+  });
+
+  // 変わった枠だけをその場で作り直す（他の枠の映像は止めない・読み込み直さない）
   function renderMulti() {
     mEl.grid.classList.toggle('has-big', multi.big != null);
-    const frag = document.createDocumentFragment();
     for (let i = 0; i < 4; i++) {
       const id = multi.slots[i]; const cam = id && camById(id);
       const existing = mEl.grid.querySelector('.slot[data-i="' + i + '"]');
-      // 同じカメラが入っている枠は作り直さない（再生を途切れさせない）
-      if (existing && existing.dataset.id === (id || '')) {
+      if (existing && existing.dataset.id === (cam ? cam.id : '')) {
         existing.classList.toggle('target', multi.target === i); existing.classList.toggle('big', multi.big === i);
         const bb = existing.querySelector('.slot-big'); if (bb) bb.classList.toggle('on', multi.big === i);
-        frag.appendChild(existing); continue;
+        continue;
       }
-      const s = document.createElement('div');
-      s.className = 'slot' + (multi.target === i ? ' target' : '') + (multi.big === i ? ' big' : '');
-      s.dataset.i = i; s.dataset.id = id || '';
-      if (!cam) {
-        s.innerHTML = '<button class="slot-empty"><b>＋ 枠 ' + (i + 1) + ' にカメラを追加</b><small>クリックして選択 → 左の一覧・検索から選ぶ</small></button>';
-        s.querySelector('.slot-empty').addEventListener('click', () => { multi.target = i; renderMulti(); el.sidebar.classList.add('open'); el.search.focus(); toast('一覧からカメラをクリックすると枠 ' + (i + 1) + ' に入ります'); });
-      } else {
-        s.innerHTML =
-          '<div class="slot-head"><span class="slot-num">' + (i + 1) + '</span><span class="slot-name"></span>' +
-          '<button class="slot-btn slot-audio" title="音声をオンにする">🔇</button>' +
-          '<button class="slot-btn slot-big" title="拡大 / 元に戻す">⤢</button>' +
-          '<button class="slot-btn slot-swap" title="別のカメラに入れ替え">⇄</button>' +
-          '<a class="slot-btn" target="_blank" rel="noopener" title="YouTubeで開く" href="https://www.youtube.com/watch?v=' + cam.video + '">▶</a>' +
-          '<button class="slot-btn slot-close" title="枠から外す">✕</button></div>' +
-          '<div class="slot-body"></div>';
-        s.querySelector('.slot-name').textContent = cam.name + '　' + [cam.pref, cam.city].filter(Boolean).join(' ');
-        if (cam.noembed) {
-          s.querySelector('.slot-body').innerHTML =
-            '<div class="slot-noembed"><b>このカメラはサイト内で再生できません</b>' +
-            '<small>配信者が外部サイトでの再生を許可していません</small>' +
-            '<a class="pill-btn" target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=' + cam.video + '">▶ YouTubeで見る</a></div>';
-          frag.appendChild(s); continue;
-        }
-        const f = document.createElement('iframe');
-        f.src = 'https://www.youtube.com/embed/' + cam.video + '?autoplay=1&mute=1&playsinline=1&rel=0&enablejsapi=1&origin=' + encodeURIComponent(location.origin);
-        f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen'; f.allowFullscreen = true; f.title = cam.name;
-        // 4本同時だと autoplay 属性だけでは再生が始まらないことがあるので、読み込み後に明示的に再生を指示する
-        f.addEventListener('load', () => {
-          ytCmd(f, 'mute'); ytCmd(f, 'playVideo');
-          setTimeout(() => { if (f.isConnected) { ytCmd(f, Number(s.dataset.i) === multi.audio ? 'unMute' : 'mute'); ytCmd(f, 'playVideo'); } }, 1500);
-        });
-        s.querySelector('.slot-body').appendChild(f);
-        if (cam.offline) s.querySelector('.slot-body').insertAdjacentHTML('beforeend', '<div class="slot-note">前回の確認時に停止していた配信です。映らない場合は ⇄ で別のカメラへ。</div>');
-        s.querySelector('.slot-audio').addEventListener('click', () => setAudio(i));
-        s.querySelector('.slot-big').addEventListener('click', () => { multi.big = multi.big === i ? null : i; renderMulti(); });
-        s.querySelector('.slot-swap').addEventListener('click', () => { multi.target = i; renderMulti(); el.sidebar.classList.add('open'); el.search.focus(); toast('一覧からカメラをクリックすると枠 ' + (i + 1) + ' を入れ替えます'); });
-        s.querySelector('.slot-close').addEventListener('click', () => removeFromMulti(i));
+      destroySlotPlayer(i);
+      const s = buildSlot(i, cam || null);
+      if (existing) existing.replaceWith(s);
+      else {
+        const after = [...mEl.grid.children].find((n) => Number(n.dataset.i) > i);
+        mEl.grid.insertBefore(s, after || null);
       }
-      frag.appendChild(s);
+      if (cam) mountSlotMedia(s, i, cam);
     }
-    mEl.grid.replaceChildren(frag);
   }
+  // 裏のタブで開いた場合など、ページが見えていない間はブラウザが自動再生を保留する。見えた時点で未開始の枠を再生する
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState !== 'visible' || !multi.open) return;
+    slotFrames.forEach((f, i) => { if (f && ![1, 2, 3].includes(slotState[i])) ytCmd(f, 'playVideo'); });
+  });
   mEl.btn.addEventListener('click', () => { if (multi.open) closeMulti(); else openMulti(); });
   $('#multi-close').addEventListener('click', closeMulti);
-  $('#multi-clear').addEventListener('click', () => { multi.slots = [null, null, null, null]; multi.big = null; multi.audio = null; multi.target = 0; renderMulti(); saveMulti(); });
+  $('#multi-clear').addEventListener('click', () => {
+    for (let i = 0; i < 4; i++) { multi.slots[i] = null; multi.auto[i] = false; multi.retry[i] = 0; }
+    multi.big = null; multi.audio = null; multi.target = 0; renderMulti(); saveMulti();
+  });
   $('#multi-random').addEventListener('click', randomizeAllSlots);
   $('#multi-share').addEventListener('click', async () => {
     const url = location.origin + location.pathname + '#multi=' + multi.slots.map((x) => x || '').join(',');

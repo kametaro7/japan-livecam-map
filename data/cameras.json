@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-12",
+ "updated": "2026-09-19",
  "cameras": [
   {
    "id": "z3OUPSoABJk",
@@ -139,11 +139,10 @@
    "lat": 43.0245,
    "lng": 141.323,
    "cat": "mountain",
-   "video": "b-3HbfxPuTM",
+   "video": "NG6bq-etrT4",
    "channel": "UC7goiCiuQAGcDCjsajq50wQ",
    "channelName": "札幌もいわ山ロープウェイ【公式-2】",
-   "title": "【LIVE】札幌もいわ山ロープウェイ-標高531ｍライブカメラ/24時間リアルタイム配信／Sapporo Mt.Moiwa Ropeway-altitude signboard Live Camera",
-   "offline": true
+   "title": "【LIVE】札幌もいわ山ロープウェイ-標高531ｍライブカメラ/24時間リアルタイム配信／Sapporo Mt.Moiwa Ropeway-altitude signboard Live Camera"
   },
   {
    "id": "HBF7bRKGlEU",
@@ -257,7 +256,7 @@
    "lat": 43.07,
    "lng": 141.515,
    "cat": "weather",
-   "video": "EoVL1rJ-_1I",
+   "video": "Y8DPqikJVJY",
    "channel": "UCq5rys-l2Q3m3UTblZyLtaQ",
    "channelName": "【北海道を盛り上げるtv!】酪大放送局 YouTubeチャンネル",
    "title": "北海道 江別・酪農学園大学ライブカメラ【LIVE】"
@@ -375,11 +374,10 @@
    "lat": 42.979,
    "lng": 144.383,
    "cat": "sea",
-   "video": "5vj2FwZmhnk",
+   "video": "awh37JpIoj4",
    "channel": "UCM01DB_H-5lPubIgNtzNmXw",
    "channelName": "北海道釧路市大川町釧路川河口ライブカメラ",
-   "title": "北海道釧路市大川町釧路川河口ライブカメラ",
-   "noembed": true
+   "title": "北海道釧路市大川町釧路川河口ライブカメラ"
   },
   {
    "id": "0dTuoudTuO0",
@@ -415,7 +413,7 @@
    "lat": 43.29,
    "lng": 145.39,
    "cat": "nature",
-   "video": "qt84GfKbeBk",
+   "video": "XxkCJp_mROw",
    "channel": "UCssUxrNQIk2GoOaml9-mS5A",
    "channelName": "レイクサンセット　Lake Sunset",
    "title": "【🔴ライブカメラ】野鳥の宝庫『風蓮湖』　Hokkaido -Lake Furen- A Treasure Trove of Wild Birds  Live Camera",
@@ -429,7 +427,7 @@
    "lat": 43.662,
    "lng": 145.132,
    "cat": "weather",
-   "video": "HAxy-l7e_gc",
+   "video": "SzPzz7owpS4",
    "channel": "UC3PYjBjrkDT8ldDqZAPxG5g",
    "channelName": "北海道標津郡標津町南一条東  文化ホール方面ライブカメラ",
    "title": "北海道標津郡標津町南一条東  文化ホール方面ライブカメラ",
@@ -456,7 +454,7 @@
    "lat": 44.017,
    "lng": 144.27,
    "cat": "weather",
-   "video": "8kM-HlHyzoM",
+   "video": "tM1yTUSjWnk",
    "channel": "UCDPcL7hccR_-xbagQ60kL7w",
    "channelName": "北海道網走市緑町ライブカメラ",
    "title": "北海道網走市緑町ライブカメラ"
@@ -534,7 +532,7 @@
    "lat": 45.416,
    "lng": 141.673,
    "cat": "weather",
-   "video": "t8BlpPwh3Gw",
+   "video": "e6AsAVu99AM",
    "channel": "UCZCRg4W6eUuvFvtdtQjzEbg",
    "channelName": "北海道稚内市中央お天気ライブカメラ",
    "title": "北海道稚内市中央お天気ライブカメラ",
@@ -574,7 +572,7 @@
    "lat": 45.108,
    "lng": 141.21,
    "cat": "sea",
-   "video": "Rjd9b1-UrjI",
+   "video": "OYjKw2utyz8",
    "channel": "UC3kfuS_vO1mxYP-YqDgHHHw",
    "channelName": "北海道利尻郡利尻町仙法志御崎海岸ライブカメラ",
    "title": "北海道利尻郡利尻町仙法志御崎海岸ライブカメラ"
@@ -627,7 +625,7 @@
    "lat": 43.769,
    "lng": 142.48,
    "cat": "animal",
-   "video": "NkOGGeVLYRk",
+   "video": "2SoAryk_ICk",
    "channel": "UCrOAX9_xMtlHHR6GE8ob2zA",
    "channelName": "Live Zoo In あさひやま 【旭山動物園公認】",
    "title": "【🐧旭山動物園 24時間ライブ🌻】ペンギン放飼場LIVE"
@@ -732,7 +730,7 @@
    "lat": 43.557,
    "lng": 141.906,
    "cat": "weather",
-   "video": "QyOMIYoK334",
+   "video": "aFnwQ9KRNRg",
    "channel": "UCKygUybHX3A3Dmew4-MnqnA",
    "channelName": "北海道滝川市幸町ライブカメラ",
    "title": "北海道滝川市幸町ライブカメラ",
@@ -759,11 +757,10 @@
    "lat": 42.63,
    "lng": 141.57,
    "cat": "traffic",
-   "video": "rVgmjul42zk",
+   "video": "pOBL34Vqd7E",
    "channel": "UCJdvHCbcijPgF1Qa3dfUrfw",
    "channelName": "北海道苫小牧市桜木町 糸井東大通ライブカメラ",
-   "title": "北海道苫小牧市桜木町 糸井東大通ライブカメラ",
-   "noembed": true
+   "title": "北海道苫小牧市桜木町 糸井東大通ライブカメラ"
   },
   {
    "id": "J8E-prFNjOA",
@@ -786,7 +783,7 @@
    "lat": 42.5,
    "lng": 141.25,
    "cat": "weather",
-   "video": "L3sQ0MERV9k",
+   "video": "UkTu6Dggm6g",
    "channel": "UClV6SY39eqyCzPQhTIWv80g",
    "channelName": "北海道白老郡白老町竹浦ライブカメラ",
    "title": "北海道白老郡白老町竹浦ライブカメラ",
@@ -800,7 +797,7 @@
    "lat": 42.495,
    "lng": 141.15,
    "cat": "animal",
-   "video": "aom8kVZOkGI",
+   "video": "vAduc5TWRcE",
    "channel": "UC_HX0GRMyc2Q8fjnjnVUwTw",
    "channelName": "のぼりべつクマ牧場 公式Youtubeチャンネル",
    "title": "9月2日 子グマの寝室ライブカメラ　のぼりべつクマ牧場"
@@ -813,7 +810,7 @@
    "lat": 42.345,
    "lng": 140.98,
    "cat": "weather",
-   "video": "-nNqCPMpNOs",
+   "video": "nLcXPoZ6MHc",
    "channel": "UCmaziVJb0MhG6QPiKolt2zQ",
    "channelName": "北海道室蘭市八丁平ライブカメラ",
    "title": "北海道室蘭市八丁平ライブカメラ",
@@ -853,7 +850,7 @@
    "lat": 42.805,
    "lng": 140.687,
    "cat": "mountain",
-   "video": "ltR1hnJ644A",
+   "video": "Wo5AaC4psNo",
    "channel": "UC-Gpej6F3EVsxsKplMeUmYg",
    "channelName": "本田珈琲店 | Niseko Ambience & Soundscape",
    "title": "【24/7 LIVE】北海道ニセコ 羊蹄山の今｜天気・積雪・絶景ライブカメラ（Mid-roll広告なし）"
@@ -879,11 +876,10 @@
    "lat": 43.13,
    "lng": 141.15,
    "cat": "sea",
-   "video": "QwH9yeuG0uI",
+   "video": "jWZ3IXOnOAo",
    "channel": "UCpeY0Kqqr90NaC2PsbJpCmg",
    "channelName": "話のわかる工務店【脇坂工務店ch】",
-   "title": "🔴北海道小樽市 銭函海岸  ライブカメラ【脇坂工務店】/試験運用中",
-   "offline": true
+   "title": "🔴北海道小樽市 銭函海岸  ライブカメラ【脇坂工務店】/試験運用中"
   },
   {
    "id": "dHElrtDv-Yo",
@@ -958,7 +954,7 @@
    "lat": 40.82,
    "lng": 140.76,
    "cat": "traffic",
-   "video": "XxPuikAOLZM",
+   "video": "duBUO0USDzc",
    "channel": "UCDtWe4uXpraQRcI9zf7a4lw",
    "channelName": "青森県青森市栄町交差点ライブカメラ",
    "title": "青森県青森市栄町交差点ライブカメラ",
@@ -972,7 +968,7 @@
    "lat": 40.8,
    "lng": 140.68,
    "cat": "weather",
-   "video": "oD7q-_VGzl0",
+   "video": "JY03DyX5He0",
    "channel": "UC8UGS1K5jfWFyWUSoltgCWg",
    "channelName": "青森県青森市新城ライブカメラ",
    "title": "青森県青森市新城ライブカメラ",
@@ -986,7 +982,7 @@
    "lat": 40.49,
    "lng": 141.51,
    "cat": "weather",
-   "video": "0wtwhsy_so8",
+   "video": "6vq_GVFqf6I",
    "channel": "UCcdEcIv1tSN7ISHRh8rveqw",
    "channelName": "青森県八戸市新井田お天気ライブカメラ",
    "title": "青森県八戸市大字新井田お天気ライブカメラ",
@@ -1013,7 +1009,7 @@
    "lat": 40.6,
    "lng": 141.19,
    "cat": "weather",
-   "video": "Xooq8ViCanw",
+   "video": "u-KUSQ-fGo8",
    "channel": "UCChzb4XBh2gh4YEkonuojWw",
    "channelName": "青森県十和田市相坂ライブカメラ",
    "title": "青森県十和田市相坂ライブカメラ"
@@ -1026,7 +1022,7 @@
    "lat": 40.59,
    "lng": 140.57,
    "cat": "mountain",
-   "video": "LblBzlp_DEU",
+   "video": "2JbyZ8OcOZU",
    "channel": "UC2EgeQFxxC4qcujHIvn9h3g",
    "channelName": "青森県平川市津軽富士が見えるライブカメラ",
    "title": "青森県平川市津軽富士が見えるライブカメラ",
@@ -1040,7 +1036,7 @@
    "lat": 40.8,
    "lng": 140.44,
    "cat": "weather",
-   "video": "b36CmTSnCQQ",
+   "video": "DpXTG-Jy1bs",
    "channel": "UCVbknFqML36XT80AgyWUkPQ",
    "channelName": "青森県五所川原市漆川ライブカメラ",
    "title": "青森県五所川原市漆川ライブカメラ"
@@ -1053,7 +1049,7 @@
    "lat": 40.64,
    "lng": 140.59,
    "cat": "weather",
-   "video": "yz-DP16CYz0",
+   "video": "66Viyp2X0xM",
    "channel": "UCrAEi5eZ4JWNCrjvX_eXplg",
    "channelName": "青森県黒石市緑ケ丘ライブカメラ",
    "title": "青森県黒石市緑ケ丘ライブカメラ",
@@ -1080,7 +1076,7 @@
    "lat": 39.7,
    "lng": 141.15,
    "cat": "city",
-   "video": "DF-8BgvU6_E",
+   "video": "QFtJI5E2i0Y",
    "channel": "UCPRNqMOl98Sywzz8BzBcq0A",
    "channelName": "岩手県盛岡市大通りライブカメラ",
    "title": "岩手県盛岡市大通りライブカメラ"
@@ -1096,7 +1092,8 @@
    "video": "FPAS3ckNp0I",
    "channel": "UC6jGw6lZY89m9xVLSUpEKXA",
    "channelName": "ACサカモト株式会社",
-   "title": "【ライブカメラ】岩手山　盛岡　お天気カメラ　Kawasaki Morioka Iwate Live Camera"
+   "title": "【ライブカメラ】岩手山　盛岡　お天気カメラ　Kawasaki Morioka Iwate Live Camera",
+   "offline": true
   },
   {
    "id": "961YDrszB64",
@@ -1174,7 +1171,8 @@
    "video": "5LvLwe6cqtY",
    "channel": "UCxgmra63vcFgLji9jhAad9A",
    "channelName": "住田町【公式】",
-   "title": "【ライブカメラ】気仙川：岩手県住田町世田米（旧昭和橋付近より）"
+   "title": "【ライブカメラ】気仙川：岩手県住田町世田米（旧昭和橋付近より）",
+   "offline": true
   },
   {
    "id": "lj7cUMQWbWc",
@@ -1249,7 +1247,7 @@
    "lat": 38.263,
    "lng": 140.87,
    "cat": "city",
-   "video": "i0fsjDALj3s",
+   "video": "CdJ0WvvBI28",
    "channel": "UC1rO0sBICCYQXCaFbl9-R5w",
    "channelName": "国分町ライブカメラ　宮城県仙台市",
    "title": "国分町ライブ配信"
@@ -1340,7 +1338,7 @@
    "lat": 38.22,
    "lng": 140.99,
    "cat": "sea",
-   "video": "C0MAwfudCMg",
+   "video": "09qZV46wo7w",
    "channel": "UCA60xTD9JKgmeY1YdjYJQEA",
    "channelName": "宮城県仙台市若林区荒浜ライブカメラ",
    "title": "宮城県仙台市若林区荒浜ライブカメラ",
@@ -1432,7 +1430,7 @@
    "lat": 39.723,
    "lng": 140.662,
    "cat": "nature",
-   "video": "XkFBxz86Eoc",
+   "video": "XTCHiZw5FYw",
    "channel": "UCLy0LVrhCARQJBfzc7PbdeA",
    "channelName": "秋田県仙北市",
    "title": "田沢湖ライブカメラ｜秋田県・仙北市｜日本一深い湖 ｜ Lake Tazawa Live Camera | Semboku City, Akita, Japan"
@@ -1497,7 +1495,7 @@
    "lat": 40.2,
    "lng": 140.03,
    "cat": "traffic",
-   "video": "cb-xuKYQPAk",
+   "video": "ymIdoij_ElA",
    "channel": "UC60XljUvK3w9eRf0p2ZGBgg",
    "channelName": "秋田県能代市下野道路沿いライブカメラ",
    "title": "秋田県能代市下野道路沿いライブカメラ"
@@ -1510,11 +1508,10 @@
    "lat": 40.27,
    "lng": 140.56,
    "cat": "weather",
-   "video": "mt2m1hLuvHo",
+   "video": "XTJ3fCgivnk",
    "channel": "UC9HBvO4Rl6DiH7lwndWo9Ng",
    "channelName": "秋田県大館市字沼館道上ライブカメラ",
-   "title": "秋田県大館市字沼館道上ライブカメラ",
-   "noembed": true
+   "title": "秋田県大館市字沼館道上ライブカメラ"
   },
   {
    "id": "J56hFFHTfls",
@@ -1589,11 +1586,10 @@
    "lat": 38.253,
    "lng": 140.338,
    "cat": "city",
-   "video": "Ef6q38c7nJ4",
+   "video": "HlAJDBamUHo",
    "channel": "UCoTpf3pWeT556_TtdLvBA9A",
    "channelName": "山形県山形市七日町ライブカメラ",
-   "title": "山形県山形市七日町ライブカメラ",
-   "noembed": true
+   "title": "山形県山形市七日町ライブカメラ"
   },
   {
    "id": "EDjrAowuq3k",
@@ -1603,7 +1599,7 @@
    "lat": 38.22,
    "lng": 140.38,
    "cat": "traffic",
-   "video": "wUMDVd61fak",
+   "video": "3xdzq7cmUJY",
    "channel": "UCIjDsBs3CLJ2gKPGElAw_-w",
    "channelName": "山形県山形市蔵王大鳥居前ライブカメラ",
    "title": "山形県山形市蔵王大鳥居前ライブカメラ"
@@ -1655,7 +1651,7 @@
    "lat": 38.59,
    "lng": 140.37,
    "cat": "nature",
-   "video": "Xaq0OQnBKN4",
+   "video": "3pEavfqv0ug",
    "channel": "UCPhMRecTIS9XHIb5PW1TokQ",
    "channelName": "山形県北村山郡大石田町最上川ライブカメラ",
    "title": "山形県北村山郡大石田町最上川ライブカメラ"
@@ -1681,7 +1677,7 @@
    "lat": 38.73,
    "lng": 139.82,
    "cat": "weather",
-   "video": "yArou8SdiOY",
+   "video": "neIFO7KDsTg",
    "channel": "UC_-J3LsGHI0aIynwLinVFwA",
    "channelName": "山形県鶴岡市白山興野ライブカメラ",
    "title": "山形県鶴岡市白山興野ライブカメラ"
@@ -1694,7 +1690,7 @@
    "lat": 38.108,
    "lng": 140.04,
    "cat": "weather",
-   "video": "PsnKkAW7ZeY",
+   "video": "L7pbggdUtqc",
    "channel": "UCGcl5vaRS01UvrD-vO1M2yg",
    "channelName": "山形県長井市栄町ライブカメラ",
    "title": "山形県長井市栄町ライブカメラ",
@@ -1839,7 +1835,7 @@
    "lat": 37.61,
    "lng": 140.08,
    "cat": "snow",
-   "video": "L-43fSg8fvw",
+   "video": "j8wBvzrBLX0",
    "channel": "UC8AHDeJk9r2ko0f2LWp8h1A",
    "channelName": "絶景・猪苗代スキー場",
    "title": "【ライブ配信】絶景・猪苗代スキー場  思い出2.0®幸せの鐘カメラ"
@@ -1917,7 +1913,7 @@
    "lat": 37.05,
    "lng": 140.87,
    "cat": "weather",
-   "video": "nfbJEoPjCRM",
+   "video": "ZT4QiezONhk",
    "channel": "UCkotx7bIbb8siMcQ1MijBGA",
    "channelName": "福島県いわき市平上荒川ライブカメラ",
    "title": "福島県いわき市平上荒川ライブカメラ",
@@ -2009,7 +2005,7 @@
    "lat": 35.67,
    "lng": 139.7027,
    "cat": "city",
-   "video": "TFnxkhY4Td4",
+   "video": "xxp2gAxFPqA",
    "channel": "UCpweG_uuLZhAH9B_Spwmmzg",
    "channelName": "原宿駅・表参道口 ライブカメラ [Harajuku Live Stream]",
    "title": "【4KLIVE】原宿駅前ライブカメラ｜表参道口・明治神宮 / Harajuku Live Stream (Omotesando, Meiji Jingu)"
@@ -2297,7 +2293,7 @@
    "lat": 35.677,
    "lng": 139.765,
    "cat": "rail",
-   "video": "L5lWkxN_Kso",
+   "video": "8zmysIKe3ZQ",
    "channel": "UC6Ljvl0Kghy9Fhe6SXViTPw",
    "channelName": "東京駅トレインビュー🚄ライブカメラ",
    "title": "東京駅トレインビュー・新幹線ライブカメラ（有楽町カーブ）"
@@ -2401,7 +2397,7 @@
    "lat": 35.665,
    "lng": 139.758,
    "cat": "rail",
-   "video": "GZE6nIP5Blc",
+   "video": "_QmMbvGF1_E",
    "channel": "UCYR27i2wj9PgsR9fYkpkFFw",
    "channelName": "東京都新橋駅新幹線ライブカメラ",
    "title": "東京都新橋駅新幹線ライブカメラ"
@@ -2453,7 +2449,7 @@
    "lat": 35.673,
    "lng": 139.737,
    "cat": "city",
-   "video": "N1JRrT74eWA",
+   "video": "vvH-beUvl78",
    "channel": "UCK1SHbanGOUZwBsUK3kmL0A",
    "channelName": "東京都港区赤坂ライブカメラ",
    "title": "東京都港区赤坂ライブカメラ",
@@ -2597,7 +2593,7 @@
    "lat": 35.728,
    "lng": 139.77,
    "cat": "rail",
-   "video": "F4meYmUzVtE",
+   "video": "RVxFePHART4",
    "channel": "UCDyC7xeQxsihyZj8SoICLEw",
    "channelName": "鉄道ファンの待合室",
    "title": "【LIVE】東京日暮里 鉄道ライブカメラ 2026-09-02 15:00- Nippori,Tokyo,Japan railcam"
@@ -2610,7 +2606,7 @@
    "lat": 35.778,
    "lng": 139.721,
    "cat": "rail",
-   "video": "QKTwxzTTleU",
+   "video": "-HMdze7YVoI",
    "channel": "UCE5uxiZBrhwFPwzlSfmdWQA",
    "channelName": "Tokyo Akabane Live Camera",
    "title": "🚅[LIVE]鉄道ライブカメラ(東京 赤羽駅周辺) Tokyo Japan Train Live Camera"
@@ -2662,7 +2658,7 @@
    "lat": 35.715,
    "lng": 139.71,
    "cat": "traffic",
-   "video": "q0Hsn_pVgxc",
+   "video": "7vC3eK8Kz_w",
    "channel": "UCWEVkTsIr7mcUuWCh1NLNOw",
    "channelName": "東京都新宿区目白通りライブカメラ",
    "title": "東京都新宿区目白通りライブカメラ"
@@ -2871,11 +2867,10 @@
    "lat": 35.697,
    "lng": 139.826,
    "cat": "city",
-   "video": "sMGKi-bpTWE",
+   "video": "KeXIblvDyd4",
    "channel": "UCo9e_ilRlTxHTCFAcaLR2-w",
    "channelName": "お弁当屋さんのライブカメラLIVE camera 【LIVE】キッチンDIVE",
-   "title": "【Live camera in Tokyo Japan】デカ盛り弁当屋キッチンDIVE 中継ライブカメラ 【渋谷・秋葉原出店計画中】JR亀戸駅 カメイドクロック近隣 24時間営業",
-   "offline": true
+   "title": "【Live camera in Tokyo Japan】デカ盛り弁当屋キッチンDIVE 中継ライブカメラ 【渋谷・秋葉原出店計画中】JR亀戸駅 カメイドクロック近隣 24時間営業"
   },
   {
    "id": "2PIdi3Xa7TY",
@@ -2924,7 +2919,7 @@
    "lat": 35.5505,
    "lng": 139.789,
    "cat": "airport",
-   "video": "de4AHZ1Ufvc",
+   "video": "HLOweH7kis4",
    "channel": "UCGCZAYq5Xxojl_tSXcVJhiQ",
    "channelName": "ANNnewsCH",
    "title": "【ライブ】羽田空港第2ターミナルを24時間配信中！  HANEDA,Tokyo International Airport Terminal2【LIVE】ANN/テレ朝"
@@ -2963,7 +2958,7 @@
    "lat": 35.656,
    "lng": 139.76,
    "cat": "traffic",
-   "video": "FxxLSqh0tNc",
+   "video": "x2Y-XQqqCpw",
    "channel": "UCawcG-FdPCNSu_JGIAZH0OQ",
    "channelName": "交通情報ライブカメラCH",
    "title": "【LIVE】首都高 1号羽田線 浜崎橋JCT ライブカメラ/Tokyo highway Live Camera   2026/09/03 00:20～"
@@ -3147,7 +3142,7 @@
    "lat": 35.72,
    "lng": 139.47,
    "cat": "weather",
-   "video": "9yVyCoH9_FQ",
+   "video": "QwCrTS1GEAg",
    "channel": "UCn7avsVELyQRKTOWcawQ80Q",
    "channelName": "東京都小平市学園東町ライブカメラ",
    "title": "東京都小平市学園東町ライブカメラ"
@@ -3199,7 +3194,7 @@
    "lat": 35.809,
    "lng": 139.096,
    "cat": "rail",
-   "video": "3nYv8qA1kTQ",
+   "video": "fYSqiNFzWJc",
    "channel": "UC_eA6kJqCVCL2Yds7--WHgQ",
    "channelName": "東京　癒しの自然動画",
    "title": "【LIVE】JR青梅線奥多摩駅運行ライブカメラ 東京最果　tokyo okutama-station Live Camera　左下緑のボタンクリックで他LIVE配信投稿してます。登録お願い致します。"
@@ -3304,7 +3299,7 @@
    "lat": 35.453,
    "lng": 139.636,
    "cat": "city",
-   "video": "38br2iznW_s",
+   "video": "nBqj3_GbSj8",
    "channel": "UCKtFn0R-NGm6cocqdoGAQTA",
    "channelName": "横浜汽車道ライブカメラ /Live Cam Yokohama Japan",
    "title": "🔴Live Cam Yokohama Japan :横浜汽車道ライブカメラ"
@@ -3395,7 +3390,7 @@
    "lat": 35.46,
    "lng": 139.6,
    "cat": "rail",
-   "video": "YX9iFslF-Vs",
+   "video": "AHR61fpHJ6A",
    "channel": "UC0F803Kns6UiSdtYd5G1CWw",
    "channelName": "Yokohama Live Camera",
    "title": "相模鉄道（天王町駅～星川駅間）LIVE映像（画面左が横浜、右が海老名・湘南台方面）#相鉄 #天王町 #星川 #横浜 #相模鉄道 #sotetsu #yokohama #live #japan"
@@ -3435,7 +3430,7 @@
    "lat": 35.53,
    "lng": 139.57,
    "cat": "traffic",
-   "video": "ZtLvW_2_7yk",
+   "video": "Rhd6_Nj119M",
    "channel": "UCs33DOFYmH27UiQ0twvZRAw",
    "channelName": "K55",
    "title": "【ライブカメラ】東名高速道路 港北パーキングエリア 下り【24/7 Webcam in Tomei Expressway / Kohoku Rest Area / Yokohama / Japan】"
@@ -3839,7 +3834,7 @@
    "lat": 35.304,
    "lng": 139.515,
    "cat": "sea",
-   "video": "i6CkpWoRPo0",
+   "video": "qroNnUKVW_g",
    "channel": "UCEygf-LdoEeUlwFo_J-XM6Q",
    "channelName": "峰ヒルズcam",
    "title": "🌊 Minegahara Wave Cam 24/7 | Kamakura Live Camera | Shichirigahama Surf Report 🇯🇵"
@@ -3983,7 +3978,7 @@
    "lat": 35.256,
    "lng": 139.155,
    "cat": "rail",
-   "video": "IttoU6sitWY",
+   "video": "E4URpGtq_cw",
    "channel": "UC9yuSASu1r3dKOvEmZwnptQ",
    "channelName": "こだまらいふ Kodama life / Shinkansen Japan bullet train",
    "title": "🔴Live東海道新幹線小田原駅ライブカメラ/Shinkansen Odawara Station Live Camera/Bullet train"
@@ -3996,7 +3991,7 @@
    "lat": 35.257,
    "lng": 139.16,
    "cat": "city",
-   "video": "xjc7uVKlZXw",
+   "video": "vZzyWyT3Ttk",
    "channel": "UCwvLW_7iljOtmDIalqaHWFg",
    "channelName": "神奈川県小田原市栄町ライブカメラ",
    "title": "神奈川県小田原市栄町ライブカメラ"
@@ -4009,7 +4004,7 @@
    "lat": 35.251,
    "lng": 139.153,
    "cat": "city",
-   "video": "oGyhKysmW6s",
+   "video": "WMsckoUte_c",
    "channel": "UCHBOhqAOhWr0iOMuZBK4miQ",
    "channelName": "神奈川県小田原市城内ケルトお堀ライブカメラ",
    "title": "神奈川県小田原市城内ケルトお堀ライブカメラ"
@@ -4022,7 +4017,7 @@
    "lat": 35.232,
    "lng": 139.106,
    "cat": "rail",
-   "video": "sX9SvPPiEL0",
+   "video": "7mSMXE4otMw",
    "channel": "UChv5Nj_I1K3NHfXlh59OZ8g",
    "channelName": "神奈川県足柄下郡箱根町湯本駅前ライブカメラ",
    "title": "神奈川県足柄下郡箱根町湯本駅前ライブカメラ"
@@ -4049,7 +4044,7 @@
    "lat": 35.27,
    "lng": 139.0,
    "cat": "nature",
-   "video": "sJ4brCOK3_4",
+   "video": "htgb-SFXrd0",
    "channel": "UCau1O0L9FBRxXbHAsyxNwSw",
    "channelName": "神奈川県足柄下郡箱根町仙石原ライブカメラ",
    "title": "神奈川県足柄下郡箱根町仙石原ライブカメラ",
@@ -4067,7 +4062,8 @@
    "channel": "UCEO0ZW29z70d0_fn8loCJpg",
    "channelName": "HGP箱根富士山ライブ映像",
    "title": "HGP箱根富士山ライブ映像 のライブ配信",
-   "noembed": true
+   "noembed": true,
+   "offline": true
   },
   {
    "id": "maMMEh-2Bsk",
@@ -4155,7 +4151,7 @@
    "lat": 35.33,
    "lng": 139.15,
    "cat": "other",
-   "video": "ogPhKQj6FuQ",
+   "video": "5WE9xDyTm7g",
    "channel": "UC0yBK57N2-O0sXyzwlyBIxQ",
    "channelName": "神奈川県足柄上郡 大井松田カートランドコース ライブカメラ",
    "title": "神奈川県足柄上郡 大井松田カートランドコース ライブカメラ",
@@ -4169,7 +4165,7 @@
    "lat": 35.4,
    "lng": 139.3,
    "cat": "weather",
-   "video": "W97zk5ImIVo",
+   "video": "KJRI2dNCpDw",
    "channel": "UC6Qu5jpAIXUpmuxx-oTIxhQ",
    "channelName": "神奈川県伊勢原市笠窪ライブカメラ",
    "title": "神奈川県伊勢原市笠窪ライブカメラ",
@@ -4183,7 +4179,7 @@
    "lat": 35.43,
    "lng": 139.6,
    "cat": "weather",
-   "video": "SNe2wUu36Sw",
+   "video": "p2yXBKTF_30",
    "channel": "UC_l0NQAoGo0A7gP8l4v-p6w",
    "channelName": "神奈川県横浜市南区中里ライブカメラ",
    "title": "神奈川県横浜市南区中里ライブカメラ"
@@ -4196,7 +4192,7 @@
    "lat": 35.55,
    "lng": 139.54,
    "cat": "weather",
-   "video": "fG2n_hTCasA",
+   "video": "xmYMuNRVGhU",
    "channel": "UCX7yJFTfeNVi8Hj758OCuzQ",
    "channelName": "神奈川県青葉区お天気ライブカメラ",
    "title": "神奈川県横浜市青葉区お天気ライブカメラ",
@@ -4265,7 +4261,8 @@
    "video": "vaifJWjqu0k",
    "channel": "UCaHr0a1x8zmQ1dxanCeuesA",
    "channelName": "朝日新聞LIVE",
-   "title": "【LIVE】千葉県ライブカメラ　千葉市内の現在の様子　Chiba 지바"
+   "title": "【LIVE】千葉県ライブカメラ　千葉市内の現在の様子　Chiba 지바",
+   "offline": true
   },
   {
    "id": "hxx54rJh_DY",
@@ -4275,7 +4272,7 @@
    "lat": 35.6,
    "lng": 140.115,
    "cat": "weather",
-   "video": "YIyh312v_Us",
+   "video": "lMpLW5-VEeg",
    "channel": "UCMCA3rrbXs2_yt0S0IZk1Nw",
    "channelName": "千葉県千葉市中央区新宿ライブカメラ",
    "title": "千葉県千葉市中央区新宿ライブカメラ"
@@ -4327,7 +4324,7 @@
    "lat": 35.79,
    "lng": 139.91,
    "cat": "rail",
-   "video": "rrGofg3vJek",
+   "video": "hrB3A_qMzxA",
    "channel": "UCr5v0BgqbYFoNBA3XN5PMJg",
    "channelName": "トレインタイムス",
    "title": "【ライブカメラ】ライブカメラ生中継／千葉県松戸市新坂川桜並木／2026年9月2日【桜並木・流鉄流山線リアルタイム配信】"
@@ -4458,7 +4455,7 @@
    "lat": 35.1,
    "lng": 140.11,
    "cat": "sea",
-   "video": "j7eJaEadPG0",
+   "video": "lNekercwbyU",
    "channel": "UCEDn0tLxpVqEvI3NJyE2DRA",
    "channelName": "波のスケッチ",
    "title": "海辺の風景　ライブカメラ波情報　南房総 鴨川シーサイド　癒しの海"
@@ -4510,7 +4507,7 @@
    "lat": 35.79,
    "lng": 140.3,
    "cat": "weather",
-   "video": "LzczODfibSs",
+   "video": "IFK5d8Pn6Ww",
    "channel": "UC4BBFj8uCYaNPGVNJGtJDlQ",
    "channelName": "千葉県成田市土屋ライブカメラ",
    "title": "千葉県成田市土屋ライブカメラ",
@@ -4538,7 +4535,7 @@
    "lat": 35.88,
    "lng": 139.64,
    "cat": "rail",
-   "video": "7CSffz4QdTk",
+   "video": "issnApZH4vE",
    "channel": "UCtf0x3AATj7_5_ZXojdcW7g",
    "channelName": "フリー動画集・自由にダウンロードして商用利用可能",
    "title": "【フリー動画】さいたま市鉄道ライブカメラ（JR上野東京ライン・京浜東北線・湘南新宿ライン・東北本線の運行情報）・Saitama City, Japan, Railway Live Camera"
@@ -4551,7 +4548,7 @@
    "lat": 35.925,
    "lng": 139.62,
    "cat": "rail",
-   "video": "mBLHtGcd4DA",
+   "video": "XHnDapzLUWU",
    "channel": "UCMz8y4JQ7ck4srZKWwz-9JA",
    "channelName": "埼玉県さいたま市北区宮原駅前ライブカメラ",
    "title": "埼玉県さいたま市北区宮原駅前ライブカメラ",
@@ -4671,7 +4668,7 @@
    "lat": 35.84,
    "lng": 139.54,
    "cat": "weather",
-   "video": "_0TkzIP4tds",
+   "video": "m1V_4eTaAA0",
    "channel": "UCnNph6O0d8OCrlI7FqhkumA",
    "channelName": "埼玉県富士見市西みずほ台ライブカメラ",
    "title": "埼玉県富士見市西みずほ台ライブカメラ",
@@ -4685,7 +4682,7 @@
    "lat": 36.19,
    "lng": 139.13,
    "cat": "weather",
-   "video": "WTOxcfi-A-Q",
+   "video": "odOa4S0cy0Q",
    "channel": "UCNvo2v31gLOevI0upyIP0sQ",
    "channelName": "埼玉県本庄市児玉町高柳ライブカメラ",
    "title": "埼玉県本庄市児玉町高柳ライブカメラ"
@@ -4737,7 +4734,7 @@
    "lat": 36.1,
    "lng": 140.105,
    "cat": "traffic",
-   "video": "tRtwc1bZ0Kg",
+   "video": "wWdIMf37tjQ",
    "channel": "UCxEu1wbIKy8rqR--9Tqa29Q",
    "channelName": "茨城県つくば市天久保 学園東大通りライブカメラ",
    "title": "茨城県つくば市天久保 学園東大通りライブカメラ",
@@ -4829,7 +4826,7 @@
    "lat": 36.48,
    "lng": 140.36,
    "cat": "weather",
-   "video": "q54Sbmu2kH8",
+   "video": "dm60wFUnfZU",
    "channel": "UC3ZzMI_q4BBdA4QIHaxAWaA",
    "channelName": "茨城県東茨城郡城里町石塚ライブカメラ",
    "title": "茨城県東茨城郡城里町石塚ライブカメラ"
@@ -4842,7 +4839,7 @@
    "lat": 36.38,
    "lng": 140.25,
    "cat": "weather",
-   "video": "_2I7zNrggE8",
+   "video": "L_c6LC7U0dU",
    "channel": "UCYqWv2wI3ZZ9Ez9zjeoWmYg",
    "channelName": "茨城県笠間市上市原お天気ライブカメラ",
    "title": "茨城県笠間市上市原お天気ライブカメラ",
@@ -4856,11 +4853,10 @@
    "lat": 36.19,
    "lng": 139.71,
    "cat": "weather",
-   "video": "LclhmPETe7c",
+   "video": "QxoDksWyLlo",
    "channel": "UCCh9iZngnYQWn2ITv77XkmQ",
    "channelName": "茨城県古河市東ライブカメラ",
-   "title": "茨城県古河市東ライブカメラ",
-   "noembed": true
+   "title": "茨城県古河市東ライブカメラ"
   },
   {
    "id": "rAMp3MDrEqc",
@@ -5017,7 +5013,7 @@
    "lat": 36.67,
    "lng": 139.97,
    "cat": "weather",
-   "video": "iJVVBff1zLs",
+   "video": "O0IwHvqFoYk",
    "channel": "UCoGgZx1mgl3sx5XXS-UO14Q",
    "channelName": "栃木県さくら市上阿久津ライブカメラ",
    "title": "栃木県さくら市上阿久津ライブカメラ のライブ配信",
@@ -5375,7 +5371,7 @@
    "lat": 36.59,
    "lng": 138.84,
    "cat": "weather",
-   "video": "p9CKwMeLw38",
+   "video": "tfG1Si66SOk",
    "channel": "UCH6tmfNgnqb0VoraLY9yoyQ",
    "channelName": "群馬県吾妻郡中之条町ライブカメラ",
    "title": "群馬県吾妻郡中之条町ライブカメラ"
@@ -5767,7 +5763,7 @@
    "lat": 35.493,
    "lng": 138.615,
    "cat": "mountain",
-   "video": "9uUYsbkvlAs",
+   "video": "KaDyjF2fHFI",
    "channel": "UCFgYp_dOj7S-wRroOxBD2Ag",
    "channelName": "精進湖民宿村",
    "title": "流星の富士山ライブカメラで星空観察！Meteor starry night Mount fuji live camera!"
