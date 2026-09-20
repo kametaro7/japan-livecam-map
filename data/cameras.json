@@ -1,5 +1,5 @@
 {
- "updated": "2026-09-19",
+ "updated": "2026-09-21",
  "cameras": [
   {
    "id": "z3OUPSoABJk",
@@ -13933,6 +13933,81 @@
    "channel": "UCbU9TQlRGeBGc9SjUYmsGAw",
    "channelName": "石垣島天文台　有松亘",
    "title": "沖縄・石垣島天文台 星空ライブカメラ(ベータ版)"
+  },
+  {
+   "id": "3zmsxqdnkps",
+   "name": "八丈島 ナズマド（大賀郷）",
+   "pref": "東京都",
+   "city": "八丈町",
+   "lat": 33.145,
+   "lng": 139.7394,
+   "cat": "sea",
+   "video": "3zmsxqdnkps",
+   "channel": "UCLUjnL67paFgQQe2_rFIlWQ",
+   "channelName": "ナズマド",
+   "title": "ナズマド のライブ配信",
+   "tags": "八丈島 八丈町 大賀郷 ホエールウォッチング クジラ 津波監視 伊豆諸島",
+   "source": "https://www.town.hachijo.tokyo.jp/wwc-live/"
+  },
+  {
+   "id": "J-fNJhSMdRA",
+   "name": "八丈島 乙千代ヶ浜（樫立）",
+   "pref": "東京都",
+   "city": "八丈町",
+   "lat": 33.0645,
+   "lng": 139.795,
+   "cat": "sea",
+   "video": "J-fNJhSMdRA",
+   "channel": "UCx5Bip1sG3S9mhYLPO2BPLg",
+   "channelName": "乙千代ヶ浜",
+   "title": "乙千代ヶ浜 のライブ配信",
+   "tags": "八丈島 八丈町 樫立 ホエールウォッチング クジラ 津波監視 伊豆諸島",
+   "source": "https://www.town.hachijo.tokyo.jp/wwc-live/"
+  },
+  {
+   "id": "1Vl2OrZkwsM",
+   "name": "八丈島 底土海水浴場（三根）",
+   "pref": "東京都",
+   "city": "八丈町",
+   "lat": 33.126,
+   "lng": 139.8165,
+   "cat": "sea",
+   "video": "1Vl2OrZkwsM",
+   "channel": "UCSHVk9_ER59jtDEXhuxUJZA",
+   "channelName": "底土港",
+   "title": "底土港 のライブ配信",
+   "tags": "八丈島 八丈町 三根 ホエールウォッチング クジラ 津波監視 伊豆諸島",
+   "source": "https://www.town.hachijo.tokyo.jp/wwc-live/"
+  },
+  {
+   "id": "FVQRLayi7Xo",
+   "name": "八丈島 洞輪沢（末吉）",
+   "pref": "東京都",
+   "city": "八丈町",
+   "lat": 33.074,
+   "lng": 139.8392,
+   "cat": "sea",
+   "video": "FVQRLayi7Xo",
+   "channel": "UCZ1hpiBVyMRmJ0fKvpE-fqA",
+   "channelName": "洞輪沢",
+   "title": "洞輪沢 のライブ配信",
+   "tags": "八丈島 八丈町 末吉 ホエールウォッチング クジラ 津波監視 伊豆諸島",
+   "source": "https://www.town.hachijo.tokyo.jp/wwc-live/"
+  },
+  {
+   "id": "f8sGmJ67Z04",
+   "name": "八丈島 藍ヶ江（中之郷）",
+   "pref": "東京都",
+   "city": "八丈町",
+   "lat": 33.06,
+   "lng": 139.815,
+   "cat": "sea",
+   "video": "f8sGmJ67Z04",
+   "channel": "UCE6vZig87H4C4JuLm4uzdWA",
+   "channelName": "藍ヶ江港",
+   "title": "藍ヶ江港 のライブ配信",
+   "tags": "八丈島 八丈町 中之郷 ホエールウォッチング クジラ 津波監視 伊豆諸島",
+   "source": "https://www.town.hachijo.tokyo.jp/wwc-live/"
   }
  ]
 }
