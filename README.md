@@ -107,6 +107,20 @@ python3 tools/update_streams.py
 git add data && git commit -m "カメラ台帳を更新" && git push
 ```
 
+## 自社ドメインへ反映する
+
+法人サイト（GitHub Pages）の `japanlivecamera/` フォルダにコピーして公開しています。
+
+```bash
+python3 tools/update_streams.py     # 必要ならデータ更新
+git add -A && git commit -m "更新" && git push   # このリポジトリ（GitHub Pages）へ
+./tools/publish-to-kameishouten.sh               # 自社ドメイン側へコピーして push
+```
+
+→ https://www.kameishouten.com/japanlivecamera/
+
+法人サイトのフォルダが `~/Desktop/kamei-shoten` 以外にある場合は、環境変数 `KAMEISHOUTEN_DIR` で指定します。
+
 ## Cloud Run で公開する
 
 静的サイトを nginx コンテナで配信する構成です（`Dockerfile` / `nginx/default.conf.template`）。
